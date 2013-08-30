@@ -18,7 +18,7 @@ define([
         },
 
         render: function () {
-            $('#appcontainer').append(this.template(this.model.toJSON()));
+            $('#content').append(this.template(this.model.toJSON()));
             return this;
         },
 

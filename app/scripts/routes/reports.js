@@ -5,10 +5,11 @@ define([
     'backbone',
     'views/reports',
     'views/summary',
+    'views/alerts-table',
     'views/operator-panel',
     'models/summary',
     'collections/operators'
-], function ($, Backbone, ReportView, SummaryView, OperatorPanelView, SummaryModel, OperatorsCollection) {
+], function ($, Backbone, ReportView, SummaryView, AlertsTableView, OperatorPanelView, SummaryModel, OperatorsCollection) {
     'use strict';
 
     var ReportsRouter = Backbone.Router.extend({
@@ -25,6 +26,7 @@ define([
             this.reportview = new ReportView();
             this.summary = new SummaryModel();
             this.summaryview = new SummaryView({model: this.summary});
+            $('#summaryrow').append(this.summaryview.render().el);
             this.harvest();
         },
 
@@ -37,10 +39,13 @@ define([
             }, this);
         },
 
-        operator: function (cid) {
+        operator: function () {
             console.log('operator');
-            var operator = this.operators.get(cid);
-            operator.view.close();
+            this.operators.each(function (operator) {
+                operator.view.close();
+            });
+            this.alertstableview = new AlertsTableView();
+            $('#content').append(this.alertstableview.render().el);
 
         }
 
