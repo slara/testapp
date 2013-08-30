@@ -14,6 +14,10 @@ define([
         render: function () {
             this.$el.html(this.template());
             return this;
+        },
+
+        close: function () {
+            $('#table-content').remove();
         }
     });
 

@@ -32,6 +32,9 @@ define([
 
         harvest: function () {
             console.log('harvest');
+            if (this.alertstableview !== undefined) {
+                this.alertstableview.close();
+            }
 
             this.operators.each(function (operator) {
                 var oppanelview = new OperatorPanelView(operator);
@@ -46,7 +49,6 @@ define([
             });
             this.alertstableview = new AlertsTableView();
             $('#content').append(this.alertstableview.render().el);
-
         }
 
     });
